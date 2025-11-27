@@ -1,5 +1,3 @@
-// src/components/auth/LoginForm.jsx (Lub src/pages/auth/LoginPage.jsx, jeśli chcesz zachować logikę w pages/)
-
 import { Form } from 'react-router';
 
 const LoginForm = () => {
@@ -10,27 +8,26 @@ const LoginForm = () => {
         Zaloguj się, aby kontynuować
       </p>
 
-      <label className="label">
-        <span className="label-text">Adres email</span>
-      </label>
-      <input
-        type="email"
-        name="email"
-        className="input input-bordered w-full"
-        required
-        placeholder="Wprowadź adres email"
-      />
-
-      <label className="label">
-        <span className="label-text">Hasło</span>
-      </label>
-      <input
-        type="password"
-        name="password"
-        className="input input-bordered w-full"
-        required
-        placeholder="Wprowadź hasło"
-      />
+      <fieldset className="fieldset">
+        <label className="label">Adres email</label>
+        <input
+          type="email"
+          className="input validator w-full"
+          placeholder="Wprowadź adres email"
+          required
+        />
+        <p className="validator-hint hidden">Wymagane</p>
+      </fieldset>
+      <fieldset className="fieldset">
+        <label className="label">Hasło</label>
+        <input
+          type="password"
+          className="input validator w-full"
+          placeholder="Wprowadź hasło"
+          required
+        />
+        <p className="validator-hint hidden">Wymagane</p>
+      </fieldset>
 
       <button type="submit" className="btn btn-primary mt-4">
         Zaloguj się
