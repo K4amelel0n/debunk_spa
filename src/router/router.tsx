@@ -11,7 +11,6 @@ export const router = createBrowserRouter([
   {
     id: 'root',
     element: <RootLayout />,
-    loader: authLoader,
     children: [
       {
         path: '/',
@@ -29,6 +28,7 @@ export const router = createBrowserRouter([
           {
             path: 'login',
             element: <LoginPage />,
+            action: authLoader,
           },
         ],
       },
