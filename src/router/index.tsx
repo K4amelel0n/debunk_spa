@@ -4,6 +4,8 @@ import RootLayout from '@layouts/RootLayout';
 import MainLayout from '@layouts/MainLayout';
 import App from '../App';
 import authLoader from './authLoader';
+import AuthLayout from '@layouts/AuthLayout';
+import LoginPage from '@pages/auth/LoginPage';
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,15 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <App />,
+          },
+        ],
+      },
+      {
+        element: <AuthLayout />,
+        children: [
+          {
+            path: 'login',
+            element: <LoginPage />,
           },
         ],
       },
