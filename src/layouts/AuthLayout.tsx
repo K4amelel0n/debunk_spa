@@ -7,18 +7,7 @@ const AuthLayout = () => {
       <header className="mb-6">
         <AppLogo />
       </header>
-      <div
-        className="
-        w-full max-w-md 
-        p-8 sm:p-10 md:p-12 
-        bg-white 
-        shadow-2xl 
-        rounded-box 
-        mx-4 
-        mb-8 
-        transition-all duration-300
-      "
-      >
+      <div className="flex justify-center w-full">
         <Outlet />
       </div>
     </div>

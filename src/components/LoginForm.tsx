@@ -20,11 +20,6 @@ const LoginForm = () => {
 
   return (
     <fetcher.Form method="post" className="flex flex-col gap-4" ref={formRef}>
-      <h3 className="text-2xl font-bold mb-4 text-center">Witaj z powrotem!</h3>
-      <p className="mb-4 text-center text-gray-500">
-        Zaloguj się, aby kontynuować
-      </p>
-
       {generalError && (
         <div role="alert" className="alert alert-error">
           <svg
