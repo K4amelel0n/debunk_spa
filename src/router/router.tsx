@@ -8,6 +8,8 @@ import AuthLayout from '@layouts/AuthLayout';
 import LoginPage from '@pages/auth/login/LoginPage';
 import loginAction from '@pages/auth/login/action';
 import logoutAction from './logoutAction';
+import AddPostPage from '@pages/posts/AddPostPage';
+import addPostAction from '@pages/posts/addPostAction';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,11 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <App />,
+          },
+          {
+            path: 'posts/add',
+            element: <AddPostPage />,
+            action: addPostAction,
           },
         ],
       },

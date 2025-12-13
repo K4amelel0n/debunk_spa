@@ -14,7 +14,12 @@ const Header = () => {
           </span>
         </Link>
         {isUser ? (
-          <UserMenu />
+          <nav className="flex items-center gap-4">
+            <Link to="/posts/add" className="btn btn-primary btn-sm">
+              Dodaj post
+            </Link>
+            <UserMenu />
+          </nav>
         ) : (
           <nav className="flex items-center gap-4">
             <Link to="/login" className="btn btn-ghost-otline btn-sm">
