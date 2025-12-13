@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import LoginForm from '@components/LoginForm';
 
 const LoginPage = () => {
@@ -13,6 +14,13 @@ const LoginPage = () => {
         </p>
 
         <LoginForm />
+
+        <p className="mt-4 text-sm text-base-content/60">
+          Nie masz konta?{' '}
+          <Link to="/register" className="link link-primary">
+            Zarejestruj się
+          </Link>
+        </p>
       </div>
     </section>
   );
