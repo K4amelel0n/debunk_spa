@@ -10,6 +10,8 @@ import loginAction from '@pages/auth/login/action';
 import RegisterPage from '@pages/auth/register/RegisterPage';
 import registerAction from '@pages/auth/register/action';
 import logoutAction from './logoutAction';
+import AddPostPage from '@pages/posts/AddPostPage';
+import addPostAction from '@pages/posts/addPostAction';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +26,11 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <App />,
+          },
+          {
+            path: 'posts/add',
+            element: <AddPostPage />,
+            action: addPostAction,
           },
         ],
       },
