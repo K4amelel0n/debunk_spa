@@ -5,6 +5,22 @@ import tailwindcss from '@tailwindcss/vite';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://debunk-api.onrender.com',
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy, _options) => {
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log(
+              `[Vite Proxy] ${req.method} ${req.url} -> ${proxyReq.path}`
+            );
+          });
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@layouts': '/src/layouts',

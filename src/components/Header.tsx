@@ -1,9 +1,9 @@
-import { Link, useRouteLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import UserMenu from './UserMenu';
 
 const Header = () => {
-  const data = useRouteLoaderData('root');
-  const isUser = data && data.role === 'user';
+  const data = useLoaderData();
+  const isUser = data && data.user;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-base-300 bg-base-100/80 backdrop-blur-md transition-all">

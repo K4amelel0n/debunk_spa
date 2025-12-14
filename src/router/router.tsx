@@ -15,11 +15,11 @@ export const router = createBrowserRouter([
   {
     id: 'root',
     element: <RootLayout />,
-    loader: authLoader,
     children: [
       {
         path: '/',
         element: <MainLayout />,
+        loader: authLoader,
         children: [
           {
             index: true,

@@ -10,9 +10,7 @@ const loginAction = async ({ request }: ActionFunctionArgs) => {
   const password = formData.get('password') as string;
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     await login(email, password);
-    localStorage.setItem('token', JSON.stringify({ role: 'user' }));
     toast.success('Zalogowano pomyślnie');
     return redirect('/');
   } catch (error: AxiosError | any) {
