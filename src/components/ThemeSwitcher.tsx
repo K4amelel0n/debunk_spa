@@ -5,7 +5,7 @@ const THEME_KEY = 'debunk_theme';
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem(THEME_KEY);
-    return (saved === 'dark' || saved === 'light') ? saved : 'light';
+    return saved === 'dark' || saved === 'light' ? saved : 'light';
   });
 
   useEffect(() => {

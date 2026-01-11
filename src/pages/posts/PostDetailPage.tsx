@@ -27,24 +27,26 @@ const PostDetailPage = () => {
 
   useEffect(() => {
     if (!user) {
-      setAuthModalMessage('Musisz się zalogować, aby zobaczyć szczegóły posta.');
+      setAuthModalMessage(
+        'Musisz się zalogować, aby zobaczyć szczegóły posta.'
+      );
       setShowAuthModal(true);
     }
   }, [user]);
 
   useEffect(() => {
     if (!id || !user) return;
-    
+
     const postId = parseInt(id);
     const foundPost = getPostById(postId);
-    
+
     if (foundPost) {
       setPost(foundPost);
       setMojaOcena(foundPost.mojaOcena ?? null);
       setOcenyPozytywne(foundPost.ocenyPozytywne);
       setOcenyNegatywne(foundPost.ocenyNegatywne);
       setKomentarze(foundPost.komentarze);
-      
+
       addToRecentlyViewed(postId);
     }
   }, [id, user]);
@@ -70,10 +72,10 @@ const PostDetailPage = () => {
       } else {
         if (mojaOcena === true) setOcenyPozytywne((prev) => prev - 1);
         if (mojaOcena === false) setOcenyNegatywne((prev) => prev - 1);
-        
+
         updatePostRating(post.id, ocena, mojaOcena);
         setMojaOcena(ocena);
-        
+
         if (ocena) setOcenyPozytywne((prev) => prev + 1);
         else setOcenyNegatywne((prev) => prev + 1);
       }
@@ -98,7 +100,8 @@ const PostDetailPage = () => {
             <div className="text-6xl mb-4">🔐</div>
             <h2 className="card-title text-2xl">Wymagane logowanie</h2>
             <p className="opacity-70 max-w-md">
-              Aby zobaczyć pełną treść artykułu, analizę fake newsa oraz móc oceniać i komentować, musisz się zalogować.
+              Aby zobaczyć pełną treść artykułu, analizę fake newsa oraz móc
+              oceniać i komentować, musisz się zalogować.
             </p>
             <div className="card-actions mt-6">
               <button className="btn btn-ghost" onClick={() => navigate('/')}>
@@ -137,19 +140,20 @@ const PostDetailPage = () => {
     return (name?.[0] || email?.[0] || '?').toUpperCase();
   };
 
-  const canEdit = user && (user.id === post.autor.id || user.email === post.autor.email);
+  const canEdit =
+    user && (user.id === post.autor.id || user.email === post.autor.email);
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-ghost btn-sm"
-        >
+        <button onClick={() => navigate(-1)} className="btn btn-ghost btn-sm">
           ← Wróć
         </button>
         {canEdit && (
-          <Link to={`/posts/${post.id}/edit`} className="btn btn-outline btn-sm">
+          <Link
+            to={`/posts/${post.id}/edit`}
+            className="btn btn-outline btn-sm"
+          >
             ✏️ Edytuj
           </Link>
         )}

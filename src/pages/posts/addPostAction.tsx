@@ -5,13 +5,13 @@ import { addPost } from '@store/mockStore';
 
 const addPostAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  
+
   const tytul = formData.get('tytul') as string;
   const trescFakeNewsa = formData.get('trescFakeNewsa') as string;
   const wyjasnienie = formData.get('wyjasnienie') as string;
   const kategoriaId = formData.get('kategoriaId') as string;
   const imageUrl = formData.get('imageUrl') as string;
-  
+
   const zrodla: string[] = [];
   for (const [key, value] of formData.entries()) {
     if (key.startsWith('zrodlo_') && value) {
@@ -20,8 +20,8 @@ const addPostAction = async ({ request }: ActionFunctionArgs) => {
   }
 
   const userStr = localStorage.getItem('debunk_current_user');
-  const autor = userStr 
-    ? JSON.parse(userStr) 
+  const autor = userStr
+    ? JSON.parse(userStr)
     : { id: 1, email: 'redaktor@debunk.pl', name: 'Jan Kowalski' };
 
   if (!tytul || !trescFakeNewsa || !wyjasnienie) {
@@ -41,7 +41,7 @@ const addPostAction = async ({ request }: ActionFunctionArgs) => {
       imageUrl: imageUrl || undefined,
       autor,
     });
-    
+
     toast.success('Post został dodany!');
     return redirect('/');
   } catch (error) {

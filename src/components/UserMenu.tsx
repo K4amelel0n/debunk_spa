@@ -10,7 +10,11 @@ const UserMenu = () => {
 
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="avatar placeholder cursor-pointer">
+      <div
+        tabIndex={0}
+        role="button"
+        className="avatar placeholder cursor-pointer"
+      >
         <div className="bg-primary text-primary-content w-10 rounded-full">
           <span className="text-sm">
             {user ? getInitial(user.name, user.email) : '?'}
@@ -27,7 +31,10 @@ const UserMenu = () => {
               <span className="font-semibold">{user.name || user.email}</span>
             </li>
             <li>
-              <Link to={`/profile/${user.id}`} className="flex items-center gap-2">
+              <Link
+                to={`/profile/${user.id}`}
+                className="flex items-center gap-2"
+              >
                 👤 Mój profil
               </Link>
             </li>
@@ -36,7 +43,10 @@ const UserMenu = () => {
         )}
         <Form method="post" action="/logout">
           <li>
-            <button type="submit" className="text-error hover:bg-error hover:text-error-content w-full">
+            <button
+              type="submit"
+              className="text-error hover:bg-error hover:text-error-content w-full"
+            >
               🚪 Wyloguj
             </button>
           </li>

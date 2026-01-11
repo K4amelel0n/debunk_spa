@@ -61,7 +61,11 @@ const FeedPage = () => {
             <select
               className="select select-bordered select-sm"
               value={categoryFilter ?? ''}
-              onChange={(e) => setCategoryFilter(e.target.value ? parseInt(e.target.value) : null)}
+              onChange={(e) =>
+                setCategoryFilter(
+                  e.target.value ? parseInt(e.target.value) : null
+                )
+              }
             >
               <option value="">Wszystkie kategorie</option>
               {KATEGORIE.map((kat) => (
@@ -97,11 +101,10 @@ const FeedPage = () => {
       </section>
 
       <aside className="hidden lg:block w-80">
-        <div className="sticky top-4">
-          <div className="card bg-base-100 shadow-md">
+        <div className="sticky top-20">
+          <div className="card bg-base-100 shadow-md max-h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="card-body">
-              <h2 className="card-title">📜 Historia postów</h2>
-              <p className="text-sm opacity-60 mb-3">Ostatnio przeglądane</p>
+              <h2 className="card-title text-base">📜 Ostatnio przeglądane</h2>
 
               {recentlyViewed.length === 0 ? (
                 <p className="text-sm opacity-60">

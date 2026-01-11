@@ -60,7 +60,9 @@ const PostCardPreview = ({ post }: PostCardPreviewProps) => {
             </div>
 
             <h2 className="card-title text-lg">{post.tytul}</h2>
-            <p className="text-sm opacity-70 line-clamp-2">{shortDescription}</p>
+            <p className="text-sm opacity-70 line-clamp-2">
+              {shortDescription}
+            </p>
             <div className="card-actions justify-start mt-2 pt-2 border-t border-base-300">
               <div className="flex gap-4 text-sm opacity-70">
                 <span className="flex items-center gap-1">

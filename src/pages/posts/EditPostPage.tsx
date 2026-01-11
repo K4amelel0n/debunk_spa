@@ -24,7 +24,7 @@ const EditPostPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    
+
     const foundPost = getPostById(parseInt(id));
     if (foundPost) {
       setPost(foundPost);
@@ -32,13 +32,18 @@ const EditPostPage = () => {
       setTrescFakeNewsa(foundPost.trescFakeNewsa);
       setWyjasnienie(foundPost.wyjasnienie);
       setKategoriaId(foundPost.kategoria?.id?.toString() || '');
-      setZrodla(foundPost.zrodla.length > 0 ? foundPost.zrodla.map((z) => z.url) : ['']);
+      setZrodla(
+        foundPost.zrodla.length > 0 ? foundPost.zrodla.map((z) => z.url) : ['']
+      );
       setImageUrl(foundPost.imageUrl || '');
     }
     setLoading(false);
   }, [id]);
 
-  const canEdit = user && post && (user.id === post.autor.id || user.email === post.autor.email);
+  const canEdit =
+    user &&
+    post &&
+    (user.id === post.autor.id || user.email === post.autor.email);
 
   const handleDodajZrodlo = () => {
     setZrodla([...zrodla, '']);
@@ -56,7 +61,7 @@ const EditPostPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!post || !canEdit) return;
 
     setSubmitting(true);
@@ -130,9 +135,7 @@ const EditPostPage = () => {
     <div className="flex justify-center items-start py-8">
       <section className="card w-full max-w-xl bg-base-100 shadow-xl">
         <div className="card-body">
-          <h3 className="card-title justify-center text-2xl">
-            ✏️ Edytuj post
-          </h3>
+          <h3 className="card-title justify-center text-2xl">✏️ Edytuj post</h3>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
             <fieldset className="fieldset" disabled={submitting}>

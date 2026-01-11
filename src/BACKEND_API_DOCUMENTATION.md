@@ -10,6 +10,7 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ## 📊 Struktura bazy danych (MongoDB)
 
 ### Kolekcja: `users`
+
 ```javascript
 {
   _id: ObjectId,
@@ -21,11 +22,13 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ```
 
 **Indeksy:**
+
 - `{ email: 1 }` - unique
 
 ---
 
 ### Kolekcja: `categories`
+
 ```javascript
 {
   _id: ObjectId,
@@ -35,20 +38,22 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ```
 
 **Predefiniowane kategorie (seed data):**
+
 ```javascript
 [
-  { nazwa: "Zdrowie", opis: "Fake newsy dotyczące zdrowia i medycyny" },
-  { nazwa: "Polityka", opis: "Dezinformacja polityczna" },
-  { nazwa: "Technologia", opis: "Fałszywe informacje o technologii" },
-  { nazwa: "Środowisko", opis: "Fake newsy o klimacie i środowisku" },
-  { nazwa: "Gospodarka", opis: "Dezinformacja ekonomiczna" },
-  { nazwa: "Nauka", opis: "Fałszywe twierdzenia naukowe" }
-]
+  { nazwa: 'Zdrowie', opis: 'Fake newsy dotyczące zdrowia i medycyny' },
+  { nazwa: 'Polityka', opis: 'Dezinformacja polityczna' },
+  { nazwa: 'Technologia', opis: 'Fałszywe informacje o technologii' },
+  { nazwa: 'Środowisko', opis: 'Fake newsy o klimacie i środowisku' },
+  { nazwa: 'Gospodarka', opis: 'Dezinformacja ekonomiczna' },
+  { nazwa: 'Nauka', opis: 'Fałszywe twierdzenia naukowe' },
+];
 ```
 
 ---
 
 ### Kolekcja: `posts`
+
 ```javascript
 {
   _id: ObjectId,
@@ -92,6 +97,7 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ```
 
 **Indeksy:**
+
 - `{ "autor._id": 1 }` - dla pobierania postów użytkownika
 - `{ status: 1, dataUtworzenia: -1 }` - dla sortowania opublikowanych postów
 - `{ "kategoria._id": 1 }` - dla filtrowania po kategorii
@@ -99,6 +105,7 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ---
 
 ### Kolekcja: `ratings`
+
 ```javascript
 {
   _id: ObjectId,
@@ -110,11 +117,13 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ```
 
 **Indeksy:**
+
 - `{ postId: 1, userId: 1 }` - unique compound index (użytkownik może ocenić post tylko raz)
 
 ---
 
 ### Kolekcja: `refreshTokens`
+
 ```javascript
 {
   _id: ObjectId,
@@ -125,6 +134,7 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 ```
 
 **Indeksy:**
+
 - `{ token: 1 }` - dla szybkiego wyszukiwania
 - `{ expiresAt: 1 }` - TTL index do automatycznego usuwania wygasłych tokenów
 
@@ -135,9 +145,11 @@ Backendowiec powinien zaimplementować wszystkie poniższe endpointy.
 Base URL: `/api/v1/auth`
 
 ### POST `/api/v1/auth/register`
+
 Rejestracja nowego użytkownika.
 
 **Request Body:**
+
 ```json
 {
   "name": "Jan Kowalski",
@@ -147,6 +159,7 @@ Rejestracja nowego użytkownika.
 ```
 
 **Response 201:**
+
 ```json
 {
   "success": true,
@@ -162,6 +175,7 @@ Rejestracja nowego użytkownika.
 ```
 
 **Response 400 (błąd walidacji):**
+
 ```json
 {
   "success": false,
@@ -175,9 +189,11 @@ Rejestracja nowego użytkownika.
 ---
 
 ### POST `/api/v1/auth/login`
+
 Logowanie użytkownika. Ustawia HTTP-only cookies z access token i refresh token.
 
 **Request Body:**
+
 ```json
 {
   "email": "jan@example.com",
@@ -186,6 +202,7 @@ Logowanie użytkownika. Ustawia HTTP-only cookies z access token i refresh token
 ```
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -200,10 +217,12 @@ Logowanie użytkownika. Ustawia HTTP-only cookies z access token i refresh token
 ```
 
 **Cookies ustawiane przez serwer:**
+
 - `accessToken` (HTTP-only, Secure, SameSite=Strict) - ważny 15 minut
 - `refreshToken` (HTTP-only, Secure, SameSite=Strict) - ważny 7 dni
 
 **Response 401:**
+
 ```json
 {
   "success": false,
@@ -217,11 +236,13 @@ Logowanie użytkownika. Ustawia HTTP-only cookies z access token i refresh token
 ---
 
 ### GET `/api/v1/auth/me`
+
 Pobiera dane aktualnie zalogowanego użytkownika (na podstawie access token z cookie).
 
 **Headers:** Cookie z accessToken
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -236,6 +257,7 @@ Pobiera dane aktualnie zalogowanego użytkownika (na podstawie access token z co
 ```
 
 **Response 401:**
+
 ```json
 {
   "success": false,
@@ -249,11 +271,13 @@ Pobiera dane aktualnie zalogowanego użytkownika (na podstawie access token z co
 ---
 
 ### POST `/api/v1/auth/refresh-token`
+
 Odświeża access token używając refresh token z cookie.
 
 **Headers:** Cookie z refreshToken
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -264,9 +288,11 @@ Odświeża access token używając refresh token z cookie.
 ---
 
 ### POST `/api/v1/auth/logout`
+
 Wylogowuje użytkownika - usuwa tokeny z cookies i bazy.
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -281,6 +307,7 @@ Wylogowuje użytkownika - usuwa tokeny z cookies i bazy.
 Base URL: `/api/v1/posts`
 
 ### GET `/api/v1/posts`
+
 Pobiera listę wszystkich opublikowanych postów.
 
 **Query Parameters:**
@@ -292,6 +319,7 @@ Pobiera listę wszystkich opublikowanych postów.
 | skip | number | Offset dla paginacji |
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -301,13 +329,19 @@ Pobiera listę wszystkich opublikowanych postów.
       "tytul": "Fałszywy cytat prezydenta USA",
       "trescFakeNewsa": "W mediach społecznościowych...",
       "wyjasnienie": "Po dokładnym sprawdzeniu...",
-      "zrodla": [
-        { "url": "https://...", "title": "Oficjalne źródło" }
-      ],
-      "kategoria": { "id": "507f1f77bcf86cd799439012", "nazwa": "Polityka", "opis": "..." },
+      "zrodla": [{ "url": "https://...", "title": "Oficjalne źródło" }],
+      "kategoria": {
+        "id": "507f1f77bcf86cd799439012",
+        "nazwa": "Polityka",
+        "opis": "..."
+      },
       "status": 1,
       "dataUtworzenia": "2026-01-08T10:00:00Z",
-      "autor": { "id": "507f1f77bcf86cd799439013", "email": "redaktor@debunk.pl", "name": "Jan Kowalski" },
+      "autor": {
+        "id": "507f1f77bcf86cd799439013",
+        "email": "redaktor@debunk.pl",
+        "name": "Jan Kowalski"
+      },
       "imageUrl": "https://...",
       "ocenyPozytywne": 47,
       "ocenyNegatywne": 3,
@@ -316,7 +350,11 @@ Pobiera listę wszystkich opublikowanych postów.
         {
           "id": "507f1f77bcf86cd799439014",
           "tresc": "Świetna analiza!",
-          "user": { "id": "507f1f77bcf86cd799439015", "email": "...", "name": "Anna" },
+          "user": {
+            "id": "507f1f77bcf86cd799439015",
+            "email": "...",
+            "name": "Anna"
+          },
           "data": "2026-01-09T14:30:00Z"
         }
       ]
@@ -326,6 +364,7 @@ Pobiera listę wszystkich opublikowanych postów.
 ```
 
 **UWAGA:** Pole `mojaOcena` powinno być:
+
 - `true` jeśli zalogowany użytkownik dał pozytywną ocenę
 - `false` jeśli zalogowany użytkownik dał negatywną ocenę
 - `null` jeśli użytkownik nie ocenił lub nie jest zalogowany
@@ -333,11 +372,13 @@ Pobiera listę wszystkich opublikowanych postów.
 ---
 
 ### GET `/api/v1/posts/:id`
+
 Pobiera szczegóły pojedynczego posta.
 
 **Response 200:** Taki sam format jak pojedynczy element z listy powyżej.
 
 **Response 404:**
+
 ```json
 {
   "success": false,
@@ -351,9 +392,11 @@ Pobiera szczegóły pojedynczego posta.
 ---
 
 ### POST `/api/v1/posts`
+
 Tworzy nowy post. **Wymaga autoryzacji.**
 
 **Request Body:**
+
 ```json
 {
   "tytul": "Tytuł analizy",
@@ -366,6 +409,7 @@ Tworzy nowy post. **Wymaga autoryzacji.**
 ```
 
 **Response 201:**
+
 ```json
 {
   "success": true,
@@ -380,11 +424,13 @@ Tworzy nowy post. **Wymaga autoryzacji.**
 ---
 
 ### PUT `/api/v1/posts/:id`
+
 Aktualizuje istniejący post. **Wymaga autoryzacji. Tylko autor może edytować.**
 
 **Request Body:** Taki sam jak POST
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -393,6 +439,7 @@ Aktualizuje istniejący post. **Wymaga autoryzacji. Tylko autor może edytować.
 ```
 
 **Response 403:**
+
 ```json
 {
   "success": false,
@@ -406,9 +453,11 @@ Aktualizuje istniejący post. **Wymaga autoryzacji. Tylko autor może edytować.
 ---
 
 ### DELETE `/api/v1/posts/:id`
+
 Usuwa post. **Wymaga autoryzacji. Tylko autor może usunąć.**
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -421,9 +470,11 @@ Usuwa post. **Wymaga autoryzacji. Tylko autor może usunąć.**
 ## 👍 Endpointy ocen (ratings)
 
 ### POST `/api/v1/posts/:id/rate`
+
 Dodaje lub zmienia ocenę posta. **Wymaga autoryzacji.**
 
 **Request Body:**
+
 ```json
 {
   "isPositive": true
@@ -431,6 +482,7 @@ Dodaje lub zmienia ocenę posta. **Wymaga autoryzacji.**
 ```
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -445,9 +497,11 @@ Dodaje lub zmienia ocenę posta. **Wymaga autoryzacji.**
 ---
 
 ### DELETE `/api/v1/posts/:id/rate`
+
 Usuwa ocenę posta. **Wymaga autoryzacji.**
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -464,9 +518,11 @@ Usuwa ocenę posta. **Wymaga autoryzacji.**
 ## 💬 Endpointy komentarzy
 
 ### POST `/api/v1/posts/:id/comments`
+
 Dodaje komentarz do posta. **Wymaga autoryzacji.**
 
 **Request Body:**
+
 ```json
 {
   "tresc": "Treść komentarza"
@@ -474,6 +530,7 @@ Dodaje komentarz do posta. **Wymaga autoryzacji.**
 ```
 
 **Response 201:**
+
 ```json
 {
   "success": true,
@@ -489,9 +546,11 @@ Dodaje komentarz do posta. **Wymaga autoryzacji.**
 ---
 
 ### DELETE `/api/v1/posts/:postId/comments/:commentId`
+
 Usuwa komentarz. **Wymaga autoryzacji. Tylko autor komentarza może usunąć.**
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -504,19 +563,45 @@ Usuwa komentarz. **Wymaga autoryzacji. Tylko autor komentarza może usunąć.**
 ## 🏷️ Endpointy kategorii
 
 ### GET `/api/v1/categories`
+
 Pobiera listę wszystkich kategorii.
 
 **Response 200:**
+
 ```json
 {
   "success": true,
   "data": [
-    { "id": "507f1f77bcf86cd799439018", "nazwa": "Zdrowie", "opis": "Fake newsy dotyczące zdrowia i medycyny" },
-    { "id": "507f1f77bcf86cd799439019", "nazwa": "Polityka", "opis": "Dezinformacja polityczna" },
-    { "id": "507f1f77bcf86cd79943901a", "nazwa": "Technologia", "opis": "Fałszywe informacje o technologii" },
-    { "id": "507f1f77bcf86cd79943901b", "nazwa": "Środowisko", "opis": "Fake newsy o klimacie i środowisku" },
-    { "id": "507f1f77bcf86cd79943901c", "nazwa": "Gospodarka", "opis": "Dezinformacja ekonomiczna" },
-    { "id": "507f1f77bcf86cd79943901d", "nazwa": "Nauka", "opis": "Fałszywe twierdzenia naukowe" }
+    {
+      "id": "507f1f77bcf86cd799439018",
+      "nazwa": "Zdrowie",
+      "opis": "Fake newsy dotyczące zdrowia i medycyny"
+    },
+    {
+      "id": "507f1f77bcf86cd799439019",
+      "nazwa": "Polityka",
+      "opis": "Dezinformacja polityczna"
+    },
+    {
+      "id": "507f1f77bcf86cd79943901a",
+      "nazwa": "Technologia",
+      "opis": "Fałszywe informacje o technologii"
+    },
+    {
+      "id": "507f1f77bcf86cd79943901b",
+      "nazwa": "Środowisko",
+      "opis": "Fake newsy o klimacie i środowisku"
+    },
+    {
+      "id": "507f1f77bcf86cd79943901c",
+      "nazwa": "Gospodarka",
+      "opis": "Dezinformacja ekonomiczna"
+    },
+    {
+      "id": "507f1f77bcf86cd79943901d",
+      "nazwa": "Nauka",
+      "opis": "Fałszywe twierdzenia naukowe"
+    }
   ]
 }
 ```
@@ -526,9 +611,11 @@ Pobiera listę wszystkich kategorii.
 ## 👤 Endpointy użytkowników
 
 ### GET `/api/v1/users/:id`
+
 Pobiera profil użytkownika.
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -543,6 +630,7 @@ Pobiera profil użytkownika.
 ---
 
 ### GET `/api/v1/users/:id/posts`
+
 Pobiera posty danego użytkownika.
 
 **Query Parameters:**
@@ -551,6 +639,7 @@ Pobiera posty danego użytkownika.
 | sort | string | `newest`, `oldest`, `most-liked`, `most-commented` |
 
 **Response 200:**
+
 ```json
 {
   "success": true,
@@ -578,6 +667,7 @@ Backend musi obsługiwać CORS dla frontendu:
 ## 🔒 Middleware autoryzacji
 
 Dla endpointów wymagających autoryzacji:
+
 1. Sprawdź cookie `accessToken`
 2. Zweryfikuj JWT token
 3. Jeśli wygasł - zwróć 401, frontend wywoła `/refresh-token`
@@ -587,14 +677,14 @@ Dla endpointów wymagających autoryzacji:
 
 ## 📋 Kody błędów
 
-| Kod | HTTP Status | Opis |
-|-----|-------------|------|
-| VALIDATION_ERROR | 400 | Błąd walidacji danych wejściowych |
-| UNAUTHORIZED | 401 | Brak lub nieprawidłowy token |
-| FORBIDDEN | 403 | Brak uprawnień do zasobu |
-| NOT_FOUND | 404 | Zasób nie istnieje |
-| CONFLICT | 409 | Konflikt (np. email już istnieje) |
-| INTERNAL_ERROR | 500 | Błąd serwera |
+| Kod              | HTTP Status | Opis                              |
+| ---------------- | ----------- | --------------------------------- |
+| VALIDATION_ERROR | 400         | Błąd walidacji danych wejściowych |
+| UNAUTHORIZED     | 401         | Brak lub nieprawidłowy token      |
+| FORBIDDEN        | 403         | Brak uprawnień do zasobu          |
+| NOT_FOUND        | 404         | Zasób nie istnieje                |
+| CONFLICT         | 409         | Konflikt (np. email już istnieje) |
+| INTERNAL_ERROR   | 500         | Błąd serwera                      |
 
 ---
 
@@ -608,29 +698,32 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String },
   password: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 // models/Category.js
 const categorySchema = new mongoose.Schema({
   nazwa: { type: String, required: true },
-  opis: { type: String }
+  opis: { type: String },
 });
 
 // models/Post.js
-const sourceSchema = new mongoose.Schema({
-  url: { type: String, required: true },
-  title: { type: String }
-}, { _id: false });
+const sourceSchema = new mongoose.Schema(
+  {
+    url: { type: String, required: true },
+    title: { type: String },
+  },
+  { _id: false }
+);
 
 const commentSchema = new mongoose.Schema({
   tresc: { type: String, required: true },
   user: {
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     email: String,
-    name: String
+    name: String,
   },
-  data: { type: Date, default: Date.now }
+  data: { type: Date, default: Date.now },
 });
 
 const postSchema = new mongoose.Schema({
@@ -641,19 +734,19 @@ const postSchema = new mongoose.Schema({
   kategoria: {
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
     nazwa: String,
-    opis: String
+    opis: String,
   },
   status: { type: Number, default: 0 },
   dataUtworzenia: { type: Date, default: Date.now },
   autor: {
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     email: String,
-    name: String
+    name: String,
   },
   imageUrl: { type: String },
   ocenyPozytywne: { type: Number, default: 0 },
   ocenyNegatywne: { type: Number, default: 0 },
-  komentarze: [commentSchema]
+  komentarze: [commentSchema],
 });
 
 postSchema.index({ 'autor._id': 1 });
@@ -665,7 +758,7 @@ const ratingSchema = new mongoose.Schema({
   postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   typ: { type: Boolean, required: true },
-  data: { type: Date, default: Date.now }
+  data: { type: Date, default: Date.now },
 });
 
 ratingSchema.index({ postId: 1, userId: 1 }, { unique: true });
@@ -674,7 +767,7 @@ ratingSchema.index({ postId: 1, userId: 1 }, { unique: true });
 const refreshTokenSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   token: { type: String, required: true },
-  expiresAt: { type: Date, required: true }
+  expiresAt: { type: Date, required: true },
 });
 
 refreshTokenSchema.index({ token: 1 });
@@ -689,41 +782,62 @@ Po wdrożeniu backendu, frontend wymaga następujących zmian:
 
 ### ❌ PLIKI DO USUNIĘCIA
 
-| Plik | Opis |
-|------|------|
+| Plik                     | Opis                                 |
+| ------------------------ | ------------------------------------ |
 | `src/store/mockStore.ts` | Cała mock baza danych w localStorage |
-| `src/store/index.ts` | Export mock store |
-| `src/api/mockData.ts` | Statyczne dane testowe |
+| `src/store/index.ts`     | Export mock store                    |
+| `src/api/mockData.ts`    | Statyczne dane testowe               |
 
 ### ⚠️ PLIKI DO MODYFIKACJI
 
 #### 1. `src/pages/feed/FeedPage.tsx`
+
 **Zamień:**
+
 ```typescript
-import { getAllPosts, getRecentlyViewedPosts, sortPosts, filterPostsByCategory } from '@store/mockStore';
+import {
+  getAllPosts,
+  getRecentlyViewedPosts,
+  sortPosts,
+  filterPostsByCategory,
+} from '@store/mockStore';
 ```
+
 **Na:**
+
 ```typescript
 import { getPosts } from '@api/posts';
 ```
 
 **Zamień funkcje:**
+
 - `getAllPosts()` → `await getPosts({ sort, category })`
 - Sortowanie i filtrowanie przenieś na backend (query params)
 
 ---
 
 #### 2. `src/pages/posts/PostDetailPage.tsx`
+
 **Zamień:**
+
 ```typescript
-import { getPostById, addToRecentlyViewed, addComment, updatePostRating, removePostRating } from '@store/mockStore';
+import {
+  getPostById,
+  addToRecentlyViewed,
+  addComment,
+  updatePostRating,
+  removePostRating,
+} from '@store/mockStore';
 ```
+
 **Na:**
+
 ```typescript
 import { getPost, ratePost, removeRating, addComment } from '@api/posts';
 ```
 
 **Zamień:**
+
 - `getPostById(id)` → `await getPost(id)`
 - `updatePostRating(...)` → `await ratePost(id, isPositive)`
 - `removePostRating(...)` → `await removeRating(id)`
@@ -733,27 +847,36 @@ import { getPost, ratePost, removeRating, addComment } from '@api/posts';
 ---
 
 #### 3. `src/pages/posts/addPostAction.tsx`
+
 **Zamień:**
+
 ```typescript
 import { addPost } from '@store/mockStore';
 ```
+
 **Na:**
+
 ```typescript
 import { createPost } from '@api/posts';
 ```
 
 **Zamień:**
+
 - Całą logikę localStorage user na pobranie z kontekstu/cookies
 - `addPost({...})` → `await createPost({...})`
 
 ---
 
 #### 4. `src/pages/posts/EditPostPage.tsx`
+
 **Zamień:**
+
 ```typescript
 import { getPostById, updatePost } from '@store/mockStore';
 ```
+
 **Na:**
+
 ```typescript
 import { getPost, updatePost } from '@api/posts';
 ```
@@ -761,11 +884,15 @@ import { getPost, updatePost } from '@api/posts';
 ---
 
 #### 5. `src/pages/profile/UserProfilePage.tsx`
+
 **Zamień:**
+
 ```typescript
 import { getPostsByUserId, getUserById, sortPosts } from '@store/mockStore';
 ```
+
 **Na:**
+
 ```typescript
 import { getUser, getUserPosts } from '@api/users';
 ```
@@ -773,7 +900,9 @@ import { getUser, getUserPosts } from '@api/users';
 ---
 
 #### 6. `src/pages/feed/loader.tsx`
+
 **Zamień całą zawartość:**
+
 ```typescript
 import { getPosts } from '@api/posts';
 
@@ -792,14 +921,19 @@ export default feedLoader;
 ---
 
 #### 7. `src/api/posts.ts`
+
 **Dodaj brakujące funkcje API:**
+
 ```typescript
 export const getPost = async (id: string): Promise<Post> => {
   const response = await api.get(`${ROUTE}/${id}`);
   return response.data.data;
 };
 
-export const updatePost = async (id: string, data: CreatePostData): Promise<Post> => {
+export const updatePost = async (
+  id: string,
+  data: CreatePostData
+): Promise<Post> => {
   const response = await api.put(`${ROUTE}/${id}`, data);
   return response.data.data;
 };
@@ -808,7 +942,10 @@ export const deletePost = async (id: string): Promise<void> => {
   await api.delete(`${ROUTE}/${id}`);
 };
 
-export const ratePost = async (id: string, isPositive: boolean): Promise<RatingResponse> => {
+export const ratePost = async (
+  id: string,
+  isPositive: boolean
+): Promise<RatingResponse> => {
   const response = await api.post(`${ROUTE}/${id}/rate`, { isPositive });
   return response.data.data;
 };
@@ -818,7 +955,10 @@ export const removeRating = async (id: string): Promise<RatingResponse> => {
   return response.data.data;
 };
 
-export const addComment = async (id: string, tresc: string): Promise<Comment> => {
+export const addComment = async (
+  id: string,
+  tresc: string
+): Promise<Comment> => {
   const response = await api.post(`${ROUTE}/${id}/comments`, { tresc });
   return response.data.data;
 };
@@ -832,6 +972,7 @@ export const getCategories = async (): Promise<Category[]> => {
 ---
 
 #### 8. Utwórz `src/api/users.ts`
+
 ```typescript
 import { api } from '@api';
 import type { User } from './auth';
@@ -844,7 +985,10 @@ export const getUser = async (id: string): Promise<User> => {
   return response.data.data;
 };
 
-export const getUserPosts = async (id: string, sort?: string): Promise<Post[]> => {
+export const getUserPosts = async (
+  id: string,
+  sort?: string
+): Promise<Post[]> => {
   const response = await api.get(`${ROUTE}/${id}/posts`, { params: { sort } });
   return response.data.data;
 };
@@ -855,7 +999,9 @@ export const getUserPosts = async (id: string, sort?: string): Promise<Post[]> =
 ### 🔧 KONFIGURACJA
 
 #### `vite.config.ts` / `tsconfig.app.json`
+
 **Usuń alias:**
+
 ```typescript
 '@store': path.resolve(__dirname, './src/store'),
 '@store/*': path.resolve(__dirname, './src/store/*'),
@@ -866,6 +1012,7 @@ export const getUserPosts = async (id: string, sort?: string): Promise<Post[]> =
 ### 📦 LOCALSTORAGE KEYS DO USUNIĘCIA (opcjonalnie)
 
 Po migracji można usunąć następujące klucze z localStorage:
+
 - `debunk_posts` - mock posty
 - `debunk_users` - mock użytkownicy
 - `debunk_recently_viewed` - można zostawić jeśli chcesz zachować historię lokalnie

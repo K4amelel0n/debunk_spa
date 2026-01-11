@@ -2,13 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useRouteLoaderData } from 'react-router';
 import type { Post } from '@api/posts';
 import type { User } from '@api/auth';
-import { getPostsByUserId, getUserById, sortPosts, type SortOption } from '@store/mockStore';
+import {
+  getPostsByUserId,
+  getUserById,
+  sortPosts,
+  type SortOption,
+} from '@store/mockStore';
 import PostCardPreview from '@components/PostCardPreview';
 
 const UserProfilePage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { user: currentUser } = useRouteLoaderData('root') as { user: User | null };
+  const { user: currentUser } = useRouteLoaderData('root') as {
+    user: User | null;
+  };
 
   const [profileUser, setProfileUser] = useState<User | null>(null);
   const [userPosts, setUserPosts] = useState<Post[]>([]);
@@ -53,7 +60,10 @@ const UserProfilePage = () => {
 
   const totalLikes = userPosts.reduce((sum, p) => sum + p.ocenyPozytywne, 0);
   const totalDislikes = userPosts.reduce((sum, p) => sum + p.ocenyNegatywne, 0);
-  const totalComments = userPosts.reduce((sum, p) => sum + p.komentarze.length, 0);
+  const totalComments = userPosts.reduce(
+    (sum, p) => sum + p.komentarze.length,
+    0
+  );
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -126,7 +136,9 @@ const UserProfilePage = () => {
 
           {userPosts.length === 0 ? (
             <div className="alert">
-              <span>Ten użytkownik nie opublikował jeszcze żadnych postów.</span>
+              <span>
+                Ten użytkownik nie opublikował jeszcze żadnych postów.
+              </span>
             </div>
           ) : (
             <div className="flex flex-col gap-4">

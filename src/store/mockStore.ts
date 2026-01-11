@@ -26,8 +26,16 @@ const initialPosts: Post[] = [
     wyjasnienie:
       'Po dokładnym sprawdzeniu oficjalnego konta prezydenta na platformie X (dawniej Twitter) okazuje się, że taki tweet nigdy nie został opublikowany. Screenshot został stworzony przy użyciu narzędzi do edycji graficznej. Analiza metadanych obrazka wskazuje na manipulację.',
     zrodla: [
-      { id: 1, url: 'https://twitter.com/POTUS', title: 'Oficjalne konto prezydenta' },
-      { id: 2, url: 'https://factcheck.org/2026/01/fake-tweet', title: 'Analiza FactCheck.org' },
+      {
+        id: 1,
+        url: 'https://twitter.com/POTUS',
+        title: 'Oficjalne konto prezydenta',
+      },
+      {
+        id: 2,
+        url: 'https://factcheck.org/2026/01/fake-tweet',
+        title: 'Analiza FactCheck.org',
+      },
     ],
     kategoria: { id: 2, nazwa: 'Polityka', opis: 'Dezinformacja polityczna' },
     status: PostStatus.OPUBLIKOWANY,
@@ -40,7 +48,8 @@ const initialPosts: Post[] = [
     komentarze: [
       {
         id: 1,
-        tresc: 'Sprawdziłem, faktycznie nie ma takiego tweeta. Dzięki za weryfikację!',
+        tresc:
+          'Sprawdziłem, faktycznie nie ma takiego tweeta. Dzięki za weryfikację!',
         user: { id: 2, email: 'jan@example.com', name: 'Anna Nowak' },
         data: '2026-01-09T14:30:00Z',
       },
@@ -54,7 +63,11 @@ const initialPosts: Post[] = [
     wyjasnienie:
       'Analiza metadanych zdjęcia oraz porównanie z oryginalnymi fotografiami z tego wydarzenia wykazuje, że zdjęcie zostało zmodyfikowane w programie graficznym. Widoczne są ślady edycji na krawędziach postaci.',
     zrodla: [
-      { id: 3, url: 'https://reuters.com/fact-check/manipulated-photo', title: 'Reuters Fact Check' },
+      {
+        id: 3,
+        url: 'https://reuters.com/fact-check/manipulated-photo',
+        title: 'Reuters Fact Check',
+      },
     ],
     kategoria: { id: 2, nazwa: 'Polityka', opis: 'Dezinformacja polityczna' },
     status: PostStatus.OPUBLIKOWANY,
@@ -68,7 +81,11 @@ const initialPosts: Post[] = [
       {
         id: 2,
         tresc: 'Widać wyraźne ślady edycji na krawędziach. Dobra robota!',
-        user: { id: 4, email: 'ekspert.graficzny@example.com', name: 'Piotr Grafik' },
+        user: {
+          id: 4,
+          email: 'ekspert.graficzny@example.com',
+          name: 'Piotr Grafik',
+        },
         data: '2026-01-07T09:15:00Z',
       },
     ],
@@ -84,7 +101,11 @@ const initialPosts: Post[] = [
       { id: 4, url: 'https://who.int/5g-safety', title: 'Stanowisko WHO' },
       { id: 5, url: 'https://nature.com/5g-research', title: 'Badania Nature' },
     ],
-    kategoria: { id: 3, nazwa: 'Technologia', opis: 'Fałszywe informacje o technologii' },
+    kategoria: {
+      id: 3,
+      nazwa: 'Technologia',
+      opis: 'Fałszywe informacje o technologii',
+    },
     status: PostStatus.OPUBLIKOWANY,
     dataUtworzenia: '2026-01-05T11:30:00Z',
     autor: { id: 5, email: 'tech@debunk.pl', name: 'Tomasz Techniczny' },
@@ -102,10 +123,22 @@ const initialPosts: Post[] = [
     wyjasnienie:
       'Sprawdzenie w Dzienniku Ustaw pokazuje, że taka ustawa nie istnieje. Ministerstwo Finansów oficjalnie zdementowało te informacje. Jest to przykład dezinformacji mającej na celu wywołanie paniki.',
     zrodla: [
-      { id: 6, url: 'https://dziennikustaw.gov.pl', title: 'Dziennik Ustaw RP' },
-      { id: 7, url: 'https://gov.pl/finanse/komunikat', title: 'Komunikat Ministerstwa' },
+      {
+        id: 6,
+        url: 'https://dziennikustaw.gov.pl',
+        title: 'Dziennik Ustaw RP',
+      },
+      {
+        id: 7,
+        url: 'https://gov.pl/finanse/komunikat',
+        title: 'Komunikat Ministerstwa',
+      },
     ],
-    kategoria: { id: 5, nazwa: 'Gospodarka', opis: 'Dezinformacja ekonomiczna' },
+    kategoria: {
+      id: 5,
+      nazwa: 'Gospodarka',
+      opis: 'Dezinformacja ekonomiczna',
+    },
     status: PostStatus.OPUBLIKOWANY,
     dataUtworzenia: '2026-01-03T14:45:00Z',
     autor: { id: 6, email: 'prawo@debunk.pl', name: 'Katarzyna Prawnik' },
@@ -131,9 +164,17 @@ const initialPosts: Post[] = [
       'Szczepionki nie zawierają mikrochipów. Technologia wymagana do stworzenia takiego urządzenia jest zbyt duża, by zmieścić się w igle strzykawki. Skład szczepionek jest publicznie dostępny i regularnie weryfikowany przez niezależne laboratoria.',
     zrodla: [
       { id: 8, url: 'https://who.int/vaccines', title: 'WHO - Szczepionki' },
-      { id: 9, url: 'https://pzh.gov.pl/szczepienia', title: 'PZH - Szczepienia' },
+      {
+        id: 9,
+        url: 'https://pzh.gov.pl/szczepienia',
+        title: 'PZH - Szczepienia',
+      },
     ],
-    kategoria: { id: 1, nazwa: 'Zdrowie', opis: 'Fake newsy dotyczące zdrowia i medycyny' },
+    kategoria: {
+      id: 1,
+      nazwa: 'Zdrowie',
+      opis: 'Fake newsy dotyczące zdrowia i medycyny',
+    },
     status: PostStatus.OPUBLIKOWANY,
     dataUtworzenia: '2026-01-02T09:00:00Z',
     autor: { id: 1, email: 'redaktor@debunk.pl', name: 'Jan Kowalski' },
@@ -163,10 +204,12 @@ const initialPosts: Post[] = [
       'E-mail podszywający się pod bank informuje o konieczności weryfikacji konta poprzez kliknięcie w link.',
     wyjasnienie:
       'Jest to klasyczny przykład phishingu. Link prowadzi do fałszywej strony imitującej bank. Prawdziwe banki nigdy nie proszą o podanie danych logowania przez e-mail. Strona ma nieprawidłowy certyfikat SSL.',
-    zrodla: [
-      { id: 10, url: 'https://cert.pl/phishing', title: 'CERT Polska' },
-    ],
-    kategoria: { id: 3, nazwa: 'Technologia', opis: 'Fałszywe informacje o technologii' },
+    zrodla: [{ id: 10, url: 'https://cert.pl/phishing', title: 'CERT Polska' }],
+    kategoria: {
+      id: 3,
+      nazwa: 'Technologia',
+      opis: 'Fałszywe informacje o technologii',
+    },
     status: PostStatus.OPUBLIKOWANY,
     dataUtworzenia: '2026-01-01T08:00:00Z',
     autor: { id: 5, email: 'tech@debunk.pl', name: 'Tomasz Techniczny' },
@@ -255,9 +298,9 @@ export interface CreatePostInput {
 export const addPost = (input: CreatePostInput): Post => {
   const posts = getAllPosts();
   const newId = posts.length > 0 ? Math.max(...posts.map((p) => p.id)) + 1 : 1;
-  
-  const kategoria = input.kategoriaId 
-    ? KATEGORIE.find((k) => k.id === input.kategoriaId) 
+
+  const kategoria = input.kategoriaId
+    ? KATEGORIE.find((k) => k.id === input.kategoriaId)
     : undefined;
 
   const zrodla = input.zrodla
@@ -312,13 +355,13 @@ export interface UpdatePostInput {
 export const updatePost = (input: UpdatePostInput): Post | null => {
   const posts = getAllPosts();
   const postIndex = posts.findIndex((p) => p.id === input.id);
-  
+
   if (postIndex === -1) return null;
 
   const existingPost = posts[postIndex];
-  
-  const kategoria = input.kategoriaId 
-    ? KATEGORIE.find((k) => k.id === input.kategoriaId) 
+
+  const kategoria = input.kategoriaId
+    ? KATEGORIE.find((k) => k.id === input.kategoriaId)
     : existingPost.kategoria;
 
   const zrodla = input.zrodla
@@ -357,9 +400,9 @@ export const updatePost = (input: UpdatePostInput): Post | null => {
 export const deletePost = (id: number): boolean => {
   const posts = getAllPosts();
   const filtered = posts.filter((p) => p.id !== id);
-  
+
   if (filtered.length === posts.length) return false;
-  
+
   saveToStorage(POSTS_STORAGE_KEY, filtered);
   return true;
 };
@@ -384,12 +427,15 @@ export const updatePostRating = (
   } else {
     post.ocenyNegatywne++;
   }
-  
+
   post.mojaOcena = isPositive;
   saveToStorage(POSTS_STORAGE_KEY, posts);
 };
 
-export const removePostRating = (postId: number, wasPositive: boolean): void => {
+export const removePostRating = (
+  postId: number,
+  wasPositive: boolean
+): void => {
   const posts = getAllPosts();
   const post = posts.find((p) => p.id === postId);
   if (!post) return;
@@ -399,20 +445,23 @@ export const removePostRating = (postId: number, wasPositive: boolean): void => 
   } else {
     post.ocenyNegatywne--;
   }
-  
+
   post.mojaOcena = null;
   saveToStorage(POSTS_STORAGE_KEY, posts);
 };
 
-export const addComment = (postId: number, tresc: string, user: User): Comment => {
+export const addComment = (
+  postId: number,
+  tresc: string,
+  user: User
+): Comment => {
   const posts = getAllPosts();
   const post = posts.find((p) => p.id === postId);
   if (!post) throw new Error('Post not found');
 
   const allComments = posts.flatMap((p) => p.komentarze);
-  const newCommentId = allComments.length > 0 
-    ? Math.max(...allComments.map((c) => c.id)) + 1 
-    : 1;
+  const newCommentId =
+    allComments.length > 0 ? Math.max(...allComments.map((c) => c.id)) + 1 : 1;
 
   const newComment: Comment = {
     id: newCommentId,
@@ -440,19 +489,29 @@ export const addToRecentlyViewed = (postId: number): void => {
 export const getRecentlyViewedPosts = (): Post[] => {
   const ids = getRecentlyViewed();
   const posts = getAllPosts();
-  return ids.map((id) => posts.find((p) => p.id === id)).filter(Boolean) as Post[];
+  return ids
+    .map((id) => posts.find((p) => p.id === id))
+    .filter(Boolean) as Post[];
 };
 
 export type SortOption = 'newest' | 'oldest' | 'most-liked' | 'most-commented';
 
 export const sortPosts = (posts: Post[], sortBy: SortOption): Post[] => {
   const sorted = [...posts];
-  
+
   switch (sortBy) {
     case 'newest':
-      return sorted.sort((a, b) => new Date(b.dataUtworzenia).getTime() - new Date(a.dataUtworzenia).getTime());
+      return sorted.sort(
+        (a, b) =>
+          new Date(b.dataUtworzenia).getTime() -
+          new Date(a.dataUtworzenia).getTime()
+      );
     case 'oldest':
-      return sorted.sort((a, b) => new Date(a.dataUtworzenia).getTime() - new Date(b.dataUtworzenia).getTime());
+      return sorted.sort(
+        (a, b) =>
+          new Date(a.dataUtworzenia).getTime() -
+          new Date(b.dataUtworzenia).getTime()
+      );
     case 'most-liked':
       return sorted.sort((a, b) => b.ocenyPozytywne - a.ocenyPozytywne);
     case 'most-commented':
@@ -462,7 +521,10 @@ export const sortPosts = (posts: Post[], sortBy: SortOption): Post[] => {
   }
 };
 
-export const filterPostsByCategory = (posts: Post[], categoryId: number | null): Post[] => {
+export const filterPostsByCategory = (
+  posts: Post[],
+  categoryId: number | null
+): Post[] => {
   if (categoryId === null) return posts;
   return posts.filter((p) => p.kategoria?.id === categoryId);
 };
